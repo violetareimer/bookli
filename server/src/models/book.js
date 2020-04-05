@@ -31,7 +31,7 @@ const Book = db.define('Book', {
 		allowNull: false
 	},
 	cover: {
-		type: Sequelize.BLOB
+		type: Sequelize.STRING
 	}
 }, { tableName: 'Book' })
 

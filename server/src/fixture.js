@@ -11,7 +11,7 @@ const initBooks = () => {
                 isbn: '9788499089515',
                 genres: ['Cuentos', 'Fantástico'],
                 authors: ['Jorge Luis Borges'],
-                cover: '/server/assets/el-aleph.jpg'
+                cover: '/assets/el-aleph.jpg'
             })
         )
         .then(() =>
@@ -23,7 +23,7 @@ const initBooks = () => {
                 isbn: '9789505153527',
                 genres: ['No ficción'],
                 authors: ['Rodolfo Walsh'],
-                cover: '/server/assets/operacion-masacre.jpg'
+                cover: '/assets/operacion-masacre.jpg'
             })
         )
         .then(() =>
@@ -35,7 +35,7 @@ const initBooks = () => {
                 isbn: '9780201616224',
                 genres: ['Educación', 'Tecnología', 'Programación'],
                 authors: ['David Thomas', 'Andrew Hunt'],
-                cover: '/server/assets/pragmatic-programmer.jpg'
+                cover: '/assets/pragmatic-programmer.jpg'
             })
         )
         .then(() =>
@@ -47,7 +47,7 @@ const initBooks = () => {
                 isbn: '9780735619678',
                 genres: ['Educación', 'Tecnología', 'Programación'],
                 authors: ['Steve McConnell'],
-                cover: '/server/assets/code-complete.jpg'
+                cover: '/assets/code-complete.jpg'
             })
         )
 }

@@ -13,7 +13,7 @@ test('Crear libro', async () => {
         isbn: '9788499089515',
         genres: ['Cuentos', 'Fantástico'],
         authors: ['Jorge Luis Borges'],
-        cover: '/server/assets/el-aleph.jpg'
+        cover: '/assets/el-aleph.jpg'
     };
 
     // Creamos el libro
@@ -32,7 +32,7 @@ test('Crear libro sin título', async () => {
         isbn: '9780201616224',
         genres: ['Educación', 'Tecnología', 'Programación'],
         authors: ['David Thomas', 'Andrew Hunt'],
-        cover: '/server/assets/pragmatic-programmer.jpg'
+        cover: '/assets/pragmatic-programmer.jpg'
     };
 
     try {
@@ -51,7 +51,7 @@ test('Obtener todos los libros', async () => {
         isbn: '9780201616224',
         genres: ['Educación', 'Tecnología', 'Programación'],
         authors: ['David Thomas', 'Andrew Hunt'],
-        cover: '/server/assets/pragmatic-programmer.jpg'
+        cover: '/assets/pragmatic-programmer.jpg'
     };
 
     const secondBookData = {
@@ -62,7 +62,7 @@ test('Obtener todos los libros', async () => {
         isbn: '9788499089515',
         genres: ['Cuentos', 'Fantástico'],
         authors: ['Jorge Luis Borges'],
-        cover: '/server/assets/el-aleph.jpg'
+        cover: '/assets/el-aleph.jpg'
     };
 
     // Creamos los libros

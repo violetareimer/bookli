@@ -7,7 +7,8 @@ const detectPort = require('detect-port')
 
 const models = require('./models/index.js')
 const bookRouter = require('./routes/book.js')
-const client = path.resolve(__dirname, '..', '..', 'client')
+const clientFolder = path.resolve(__dirname, '..', '..', 'client')
+const serverFolder = path.resolve(__dirname, '..', '..', 'server')
 
 const inTest = process.env.NODE_ENV === 'test'
 
@@ -20,8 +21,10 @@ async function startServer(port=process.env.SERVER_PORT) {
 
     !inTest && app.use(morgan('dev'))
 
-    app.use(express.static(path.resolve(client, 'src')));
-    app.use('/assets', express.static(path.resolve(client, 'assets')));
+    app.use(express.static(path.resolve(clientFolder, 'src')));
+    app.use(express.static(path.resolve(serverFolder, 'src')));
+    app.use('/assets', express.static(path.resolve(clientFolder, 'assets')));
+    app.use('/assets', express.static(path.resolve(serverFolder, 'assets')));
 
     // Rutas
     app.use('/api/v1/books', bookRouter)
