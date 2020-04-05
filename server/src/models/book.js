@@ -35,7 +35,11 @@ const Book = db.define('Book', {
 	}
 }, { tableName: 'Book' })
 
-const getAllBooks = () => Book.findAll()
+const getAllBooks = () => Book.findAll({
+	attributes: {
+	    exclude: ['createdAt', 'updatedAt']
+	}
+})
 
 const createBook = (data) => Book.create(data)
 
