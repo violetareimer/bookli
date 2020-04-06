@@ -43,10 +43,13 @@ const getAllBooks = () => Book.findAll({
 
 const createBook = (data) => Book.create(data)
 
+const getBook = (id) => Book.findOne({where: {id: id}})
+
 const BookModel = {
 	Book: Book,
 	getAll: getAllBooks,
 	create: createBook,
+	get: getBook
 }
 
 module.exports = BookModel
