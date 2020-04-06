@@ -10,7 +10,13 @@ async function search(query) {
     return await resp.json();
 }
 
+async function get(id) {
+    const resp = await fetch(`${BASE_URL}/books/${id}`)
+    return await resp.json();
+}
+
 export default {
     getAll,
+    get,
     search
 }
