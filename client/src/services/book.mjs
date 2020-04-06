@@ -5,6 +5,12 @@ async function getAll() {
     return await resp.json();
 }
 
+async function search(query) {
+    const resp = await fetch(`${BASE_URL}/books?query=${query}`)
+    return await resp.json();
+}
+
 export default {
-    getAll
+    getAll,
+    search
 }
