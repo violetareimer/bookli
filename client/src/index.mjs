@@ -1,23 +1,48 @@
 import { initComponents } from './core/index.mjs';
+import { debounce } from './core/utils.mjs';
 import BookServices from './services/book.mjs';
 
-async function initApp() {
-    const $bookList = document.querySelector('.booklist');
-    const components = await initComponents();
+let $bookList;
+let $searchBox;
+let components;
+let books;
 
-    const BookComponent = components.book;
-    const books = await BookServices.getAll();
+async function main() {
+    $bookList = document.querySelector('.booklist');
+    $searchBox = document.querySelector('.search__input');
+    components = await initComponents();
+    books = await BookServices.getAll();
 
-    // TODO: refactor a componente
+    renderBookList($bookList, components.book, books);
+
+    $searchBox.addEventListener('input', debounce(handleSearch, 300));
+}
+
+async function handleSearch() {
+    books = await BookServices.search($searchBox.value);
+    $bookList.innerHTML = "";
+    renderBookList($bookList, components.book, books);
+}
+
+// TODO: refactor a componente
+function renderBookList($container, BookComponent, books) {
+    $container.classList.remove('booklist--empty');
+
     if (books.length) {
+        const fragment = document.createDocumentFragment();
         books.forEach(function (book) {
-            const comp = new BookComponent(book);
-            $bookList.appendChild(comp);
+            const bookComponent = new BookComponent(book);
+            fragment.appendChild(bookComponent);
         });
+
+        $container.appendChild(fragment);
     } else {
-        $bookList.classList.add('booklist--empty');
-        $bookList.innerText = "Hmmm... Parece que nuestra libreria esta vacia.";
+        $container.classList.add('booklist--empty');
+        $container.innerHTML = `
+            <img src="/assets/empty.svg" alt="">
+            <p>Hmmm... Parece que no tenemos el libro que buscas.<br>Proba con otra busqueda.</p>
+        `;
     }
 }
 
-initApp();
+main();
