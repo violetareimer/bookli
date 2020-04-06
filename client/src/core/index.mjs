@@ -10,4 +10,17 @@ export async function initComponents() {
     }
 }
 
-export default { initComponents }
+// Inicializa los componentes y los hace global en Bookli
+export async function initCore() {
+    const Bookli = {
+        components: {},
+        state: {
+            books: []
+        }
+    };
+
+    Bookli.components = await initComponents();
+    return Bookli;
+}
+
+export default { initCore }

@@ -11,4 +11,13 @@ router.get('/', function (req, res) {
 	})
 })
 
+router.get('/:id', function (req, res) {
+	BookModel.get(req.params.id).then((book) => {
+		if (book == null) {
+			res.status(404).send('El libro ' + req.params.id + ' no fue encontrado')
+		} else
+			res.status(200).send(book)
+	}).catch(_ => res.status(500).send('Error al obtener libro'))
+})
+
 module.exports = router

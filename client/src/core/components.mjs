@@ -1,5 +1,7 @@
 const components = {};
 
+function noop() {}
+
 function render(definition, props={}) {
     let tmpl = definition.template;
 
@@ -30,9 +32,14 @@ function makeComponent(name, definition) {
     Object.setPrototypeOf(RootElement, HTMLElement);
 
     proto.connectedCallback = function onConnect() {
+        const comp = {
+            el: this,
+            state: {}
+        };
+
         let attrs = Array.from(this.attributes || [])
 
-        const parsedProps = Object.keys(definition.props || {})
+        comp.state = Object.keys(definition.props || {})
             .reduce(function parseProps(props, prop) {
                 const type = definition.props[prop] || String;
                 const attr = attrs.find(a => a.name === prop);
@@ -46,9 +53,15 @@ function makeComponent(name, definition) {
                 return props
             }, {});
 
+        this.state = comp.state;
+
         this.innerHTML = definition.render
-            ? definition.render(parsedProps)
-            : render(definition, parsedProps);
+            ? definition.render(comp.state)
+            : render(definition, comp.state);
+
+        const onUpdate = definition.mounted ? definition.mounted.bind(comp) : noop;
+
+        Promise.resolve().then(onUpdate);
     }
 
     window.customElements.define(`b-${name}`, RootElement);

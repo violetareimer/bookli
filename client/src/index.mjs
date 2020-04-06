@@ -1,27 +1,42 @@
-import { initComponents } from './core/index.mjs';
+import { initCore } from './core/index.mjs';
 import { debounce } from './core/utils.mjs';
 import BookServices from './services/book.mjs';
 
 let $bookList;
 let $searchBox;
-let components;
-let books;
+let Bookli;
 
-async function main() {
+initCore().then(function (_Bookli) {
     $bookList = document.querySelector('.booklist');
     $searchBox = document.querySelector('.search__input');
-    components = await initComponents();
-    books = await BookServices.getAll();
 
-    renderBookList($bookList, components.book, books);
+    Bookli = _Bookli;
+    main();
+});
 
+async function main() {
+    Bookli.books = await BookServices.getAll();
+
+    renderBookList($bookList, Bookli.components.book, Bookli.books);
     $searchBox.addEventListener('input', debounce(handleSearch, 300));
+    $bookList.addEventListener('click', onSelectBook);
+}
+
+function onSelectBook(e) {
+    const $book = e.target.closest('b-book');
+
+    if ($book) {
+        $bookList.innerHTML = "";
+        $book.classList.add('book--full');
+        $bookList.appendChild($book);
+    }
 }
 
 async function handleSearch() {
-    books = await BookServices.search($searchBox.value);
+    Bookli.books = await BookServices.search($searchBox.value);
+
     $bookList.innerHTML = "";
-    renderBookList($bookList, components.book, books);
+    renderBookList($bookList, Bookli.components.book, Bookli.books);
 }
 
 // TODO: refactor a componente
@@ -44,5 +59,3 @@ function renderBookList($container, BookComponent, books) {
         `;
     }
 }
-
-main();
