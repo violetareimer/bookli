@@ -1,5 +1,7 @@
 const Sequelize = require('sequelize')
 
+const Op = Sequelize.Op
+
 const db = require('../db.js')
 
 const Book = db.define('Book', {
@@ -35,11 +37,36 @@ const Book = db.define('Book', {
 	}
 }, { tableName: 'Book' })
 
-const getAllBooks = () => Book.findAll({
-	attributes: {
-	    exclude: ['createdAt', 'updatedAt']
+const getAllBooks = (filter) => {
+	let where = {}
+
+	if (filter) {
+		const like = {
+			[Op.like]: '%' + filter + '%'
+		}
+
+		where = {
+			[Op.or]: [
+				{
+					title: like
+				},
+				{
+					isbn: like
+				},
+				{
+					publisher: like
+				}
+			]
+		}
 	}
-})
+
+	return Book.findAll({
+		attributes: {
+		    exclude: ['createdAt', 'updatedAt']
+		},
+		where: where
+	})
+}
 
 const createBook = (data) => Book.create(data)
 
