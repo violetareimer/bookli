@@ -94,3 +94,13 @@ test('Fetch all books', async () => {
     expect(Array.isArray(books)).toBe(true);
     expect(books[0].id).toBe(1);
 })
+
+test('Find books', async () => {
+    // fetch mock
+    window.fetch = makeFakeJSONFetch({ success: true, result: [{ id: 1 }] })
+
+    const books = await bookServices.search();
+
+    expect(Array.isArray(books)).toBe(true);
+    expect(books[0].id).toBe(1);
+})
