@@ -76,3 +76,7 @@ p { margin: 0; }
     display: grid;
     grid-gap: var(--space-3);
 }
+
+.booklist--empty {
+    text-align: center;
+}
