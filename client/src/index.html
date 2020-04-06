@@ -1,16 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" class="has-background-light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no">
 
     <link rel="icon" href="/assets/logo.svg" type="image/x-icon"/>
-
+    <link rel="stylesheet" href="/styles/main.css">
     <title>Bookli</title>
 </head>
 
-<body>
+<body class="app-layout">
+    <header class="header">
+        <div class="brand">
+            <img class="brand__logo" src="/assets/logo.svg" alt="bookli logo">
+            <span class="brand__name">Bookli</span>
+        </div>
+    </header>
 
+    <main class="main booklist"></main>
 </body>
+
 <script src="/index.mjs" type="module"></script>
 </html>
