@@ -50,7 +50,7 @@ test('Buscar libros por api con un resultado', async () => {
     };
 
     // Creamos los libros
-    const firstBook = await BookModels.create(firstBookData)
+    await BookModels.create(firstBookData)
     const secondBook = await BookModels.create(secondBookData)
 
     const URL = `${baseURL}/books?query=aleph`;
@@ -58,9 +58,10 @@ test('Buscar libros por api con un resultado', async () => {
     const books = await req.json()
 
     expect(books.length).toBe(1)
+    expect(secondBook.id).toBe(books[0].id)
 });
 
-test('Buscar libros por api con ningún resultado', async () => {
+test('Buscar libros por api sin ningún resultado', async () => {
 	const firstBookData = {
         title: 'The Pragmatic Programmer',
         synopsis: 'Straight from the programming trenches, The Pragmatic Programmer cuts through the increasing specialization and technicalities of modern software development to examine the core process--taking a requirement and producing working, maintainable code that delights its users. It covers topics ranging from personal responsibility and career development to architectural techniques for keeping your code flexible and easy to adapt and reuse.',
@@ -118,8 +119,8 @@ test('Buscar libros por api con más de un resultado', async () => {
     };
 
     // Creamos los libros
-    const firstBook = await BookModels.create(firstBookData)
-    const secondBook = await BookModels.create(secondBookData)
+    await BookModels.create(firstBookData)
+    await BookModels.create(secondBookData)
 
     const URL = `${baseURL}/books?query=978`;
     const req = await fetch(URL)
