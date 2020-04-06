@@ -74,6 +74,12 @@ p { margin: 0; }
 }
 
 .brand {
+    all: unset;
+    cursor: pointer;
+    padding: var(--space-3);
+}
+
+.brand {
     display: inline-flex;
     align-items: baseline
 }
