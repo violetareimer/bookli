@@ -1,5 +1,6 @@
 #alumnos:
 Reimer Violeta
+Ponce Nahuel
 #numero de integrantes:
 3
 
