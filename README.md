@@ -1,3 +1,8 @@
+#alumnos:
+Reimer Violeta
+#numero de integrantes:
+3
+
 # Bookli
 
 Aplicación utilizada en la cursada 2020 de Ingenieria de Software. UTN-FRLP
