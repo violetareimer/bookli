@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "dev": "node ./server/src/fixture.js && nodemon ./server/src/index.js",
+        "dev": "node ./scripts/init.js",
         "start": "node ./server/src/index.js",
         "test": "jest",
         "test:e2e": "nightwatch test/e2e"
