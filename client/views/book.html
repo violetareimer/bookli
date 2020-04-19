@@ -1,0 +1,17 @@
+<div class="book {{ 'book--full' if detail }}">
+    <div class="book__cover" >
+        <img src="{{book.cover}}" alt="book cover">
+    </div>
+
+    <div class="book__header">
+        <p class="book__title">{{ book.title }}</p>
+        <p class="book__author">por {{ book.authors | join(', ') }}</p>
+    </div>
+    <div class="book__body">
+        <p class="book__synopsis">{{ book.synopsis }}</p>
+        <div class="book__extra-info">
+            <p>Se publicó en el año <span class="highlight">{{ book.year }}</span> por la editorial <span class="highlight">{{ book.publisher }}</span>.</p>
+            <p>Es un libro perteneciente a los géneros <span class="highlight">{{ book.genres | join(', ') }}</span>.</p>
+        </div>
+    </div>
+</div>

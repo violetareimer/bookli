@@ -1,0 +1,15 @@
+{% extends "_base.html" %}
+
+{% block search %}
+<div class="search">
+    <img src="/assets/search.svg" aria-hidden="true" class="search__icon">
+    <input type="text" aria-label="Buscar un libro" class="search__input" data-ref="search">
+</div>
+{% endblock %}
+
+{% block js %}
+<script type="module" src="/js/home.js"></script>
+
+<script src="/js/partials/booklist.js"></script>
+<script src="/js/partials/book.js"></script>
+{% endblock %}

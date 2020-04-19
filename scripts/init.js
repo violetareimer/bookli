@@ -1,9 +1,55 @@
 const nodemon = require('nodemon');
+const nunjucks = require('nunjucks');
 const path = require('path');
+const fsSync = require('fs');
+const fs = fsSync.promises;
 
 const fixture = require('./fixture.js');
 
 const serverPath = path.resolve(__dirname, '..', 'server', 'src');
+const clientPath = path.resolve(__dirname, '..', 'client');
+const viewsPath = path.resolve(clientPath, 'views');
+const tmplsPath = path.resolve(clientPath, 'js', 'partials');
+
+function compileTemplate(name, template, dest) {
+    const tmpl = nunjucks.precompileString(template, { name });
+
+    return fs.writeFile(dest, tmpl);
+}
+var deleteFolderRecursive = function(path) {
+    fsSync.readdirSync(path).forEach(function(file,index){
+        var curPath = path + "/" + file;
+        if (fsSync.lstatSync(curPath).isDirectory()) { // recurse
+            deleteFolderRecursive(curPath);
+        } else { // delete file
+            fsSync.unlinkSync(curPath);
+        }
+    });
+    fsSync.rmdirSync(path);
+};
+
+async function compileTemplates() {
+    if (fsSync.statSync(tmplsPath)) {
+        deleteFolderRecursive(tmplsPath);
+    }
+
+    fsSync.mkdirSync(tmplsPath);
+
+    const files = fsSync.readdirSync(viewsPath)
+
+    const promises = files
+        .filter((fileName) => !fileName.startsWith('_'))
+        .map(function (fileName) {
+            const filePath = path.resolve(viewsPath, fileName);
+            const tmplPath = path.resolve(tmplsPath, fileName.replace('html', 'js'));
+            return fs.readFile(filePath, 'utf8')
+                .then(function (tmplContent) {
+                    return compileTemplate(fileName, tmplContent, tmplPath);
+                });
+        });
+
+    return Promise.all(promises);
+}
 
 function startDevServer() {
     nodemon({
@@ -25,6 +71,7 @@ function startDevServer() {
 
 async function start() {
     await fixture.initBooks();
+    await compileTemplates();
     startDevServer();
 }
 
