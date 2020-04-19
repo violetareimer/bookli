@@ -16,6 +16,7 @@ function compileTemplate(name, template, dest) {
 
     return fs.writeFile(dest, tmpl);
 }
+
 var deleteFolderRecursive = function(path) {
     fsSync.readdirSync(path).forEach(function(file,index){
         var curPath = path + "/" + file;
@@ -29,11 +30,19 @@ var deleteFolderRecursive = function(path) {
 };
 
 async function compileTemplates() {
-    if (fsSync.statSync(tmplsPath)) {
-        deleteFolderRecursive(tmplsPath);
-    }
+    try {
+        const exist = fsSync.statSync(tmplsPath);
+        if (exist) {
+            deleteFolderRecursive(tmplsPath);
+        }
 
-    fsSync.mkdirSync(tmplsPath);
+    } catch (e) {
+        if (e.code !== 'ENOENT') {
+            throw e;
+        }
+    } finally {
+        fsSync.mkdirSync(tmplsPath);
+    }
 
     const files = fsSync.readdirSync(viewsPath)
 
