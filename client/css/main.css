@@ -128,7 +128,6 @@ p { margin: 0; }
     top: 50%;
     transform: translateY(-50%);
     margin-left: var(--space-1);
-    stroke: var(--gray-2);
 }
 
 /* booklist */
