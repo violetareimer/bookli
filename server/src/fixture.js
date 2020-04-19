@@ -11,7 +11,8 @@ const initBooks = () => {
                 isbn: '9788499089515',
                 genres: ['Cuentos', 'Fantástico'],
                 authors: ['Jorge Luis Borges'],
-                cover: '/assets/el-aleph.jpg'
+                cover: '/assets/el-aleph.jpg',
+                status: 'AV'
             })
         )
         .then(() =>
@@ -23,7 +24,8 @@ const initBooks = () => {
                 isbn: '9789505153527',
                 genres: ['No ficción'],
                 authors: ['Rodolfo Walsh'],
-                cover: '/assets/operacion-masacre.jpg'
+                cover: '/assets/operacion-masacre.jpg',
+                status: 'AV'
             })
         )
         .then(() =>
@@ -35,7 +37,8 @@ const initBooks = () => {
                 isbn: '9780201616224',
                 genres: ['Educación', 'Tecnología', 'Programación'],
                 authors: ['David Thomas', 'Andrew Hunt'],
-                cover: '/assets/pragmatic-programmer.jpg'
+                cover: '/assets/pragmatic-programmer.jpg',
+                status: 'AV'
             })
         )
         .then(() =>
@@ -47,7 +50,8 @@ const initBooks = () => {
                 isbn: '9780735619678',
                 genres: ['Educación', 'Tecnología', 'Programación'],
                 authors: ['Steve McConnell'],
-                cover: '/assets/code-complete.jpg'
+                cover: '/assets/code-complete.jpg',
+                status: 'AV'
             })
         )
         .then(() =>
@@ -59,7 +63,8 @@ const initBooks = () => {
                 isbn: '9780486474915',
                 genres: ['Policial', 'Cuentos'],
                 authors: ['Sir Arthur Conan Doyle'],
-                cover: '/assets/sherlock.jpg'
+                cover: '/assets/sherlock.jpg',
+                status: 'AV'
             })
         )
         .then(() =>
@@ -71,7 +76,8 @@ const initBooks = () => {
                 isbn: '9781328869333',
                 genres: ['Ciencia ficción', 'Novela'],
                 authors: ['George Orwell'],
-                cover: '/assets/1984.jpg'
+                cover: '/assets/1984.jpg',
+                status: 'AV'
             })
         )
         .then(() =>
@@ -83,7 +89,8 @@ const initBooks = () => {
                 isbn: '9781541276727',
                 genres: ['Ficción distópica', 'Novela'],
                 authors: ['Franz Kafka'],
-                cover: '/assets/trial.jpg'
+                cover: '/assets/trial.jpg',
+                status: 'AV'
             })
         )
         .then(() =>
@@ -95,7 +102,8 @@ const initBooks = () => {
                 isbn: '9781451673319',
                 genres: ['Ciencia ficción', 'Novela'],
                 authors: ['Ray Bradbury'],
-                cover: '/assets/fahrenheit.jpg'
+                cover: '/assets/fahrenheit.jpg',
+                status: 'AV'
             })
         )
         .then(() =>
@@ -107,7 +115,8 @@ const initBooks = () => {
                 isbn: '9780486264783',
                 genres: ['Comedia', 'Teatro'],
                 authors: ['Oscar Wilde'],
-                cover: '/assets/earnest.jpg'
+                cover: '/assets/earnest.jpg',
+                status: 'AV'
             })
         )
         .then(() =>
@@ -119,7 +128,8 @@ const initBooks = () => {
                 isbn: '9780451526342',
                 genres: ['Sátira', 'Novela'],
                 authors: ['George Orwell'],
-                cover: '/assets/animal-farm.jpg'
+                cover: '/assets/animal-farm.jpg',
+                status: 'AV'
             })
         )
 }
