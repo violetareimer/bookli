@@ -1,3 +1,16 @@
+export function getRefs (context) {
+    const refs = {};
+    const $els = (context || document.body)
+        .querySelectorAll('[data-ref]');
+
+    $els.forEach(function ($el) {
+        const name = $el.getAttribute('data-ref');
+        refs[name] = $el;
+    });
+
+    return refs;
+}
+
 export function debounce(func, wait, immediate) {
     var timeout;
     return function() {
@@ -12,3 +25,7 @@ export function debounce(func, wait, immediate) {
         if (callNow) func.apply(context, args);
     };
 };
+
+export function render(template, context, parent) {
+    parent.innerHTML = nunjucks.render(template, context);
+}
