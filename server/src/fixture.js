@@ -12,7 +12,7 @@ const initBooks = () => {
                 genres: ['Cuentos', 'Fantástico'],
                 authors: ['Jorge Luis Borges'],
                 cover: '/assets/el-aleph.jpg',
-                status: 'AVAILABLE'
+                status: BookModel.status.AVAILABLE
             })
         )
         .then(() =>
@@ -25,7 +25,7 @@ const initBooks = () => {
                 genres: ['No ficción'],
                 authors: ['Rodolfo Walsh'],
                 cover: '/assets/operacion-masacre.jpg',
-                status: 'AVAILABLE'
+                status: BookModel.status.AVAILABLE
             })
         )
         .then(() =>
@@ -38,7 +38,7 @@ const initBooks = () => {
                 genres: ['Educación', 'Tecnología', 'Programación'],
                 authors: ['David Thomas', 'Andrew Hunt'],
                 cover: '/assets/pragmatic-programmer.jpg',
-                status: 'AVAILABLE'
+                status: BookModel.status.AVAILABLE
             })
         )
         .then(() =>
@@ -51,7 +51,7 @@ const initBooks = () => {
                 genres: ['Educación', 'Tecnología', 'Programación'],
                 authors: ['Steve McConnell'],
                 cover: '/assets/code-complete.jpg',
-                status: 'AVAILABLE'
+                status: BookModel.status.AVAILABLE
             })
         )
         .then(() =>
@@ -64,7 +64,7 @@ const initBooks = () => {
                 genres: ['Policial', 'Cuentos'],
                 authors: ['Sir Arthur Conan Doyle'],
                 cover: '/assets/sherlock.jpg',
-                status: 'AVAILABLE'
+                status: BookModel.status.AVAILABLE
             })
         )
         .then(() =>
@@ -77,7 +77,7 @@ const initBooks = () => {
                 genres: ['Ciencia ficción', 'Novela'],
                 authors: ['George Orwell'],
                 cover: '/assets/1984.jpg',
-                status: 'AVAILABLE'
+                status: BookModel.status.AVAILABLE
             })
         )
         .then(() =>
@@ -90,7 +90,7 @@ const initBooks = () => {
                 genres: ['Ficción distópica', 'Novela'],
                 authors: ['Franz Kafka'],
                 cover: '/assets/trial.jpg',
-                status: 'AVAILABLE'
+                status: BookModel.status.AVAILABLE
             })
         )
         .then(() =>
@@ -103,7 +103,7 @@ const initBooks = () => {
                 genres: ['Ciencia ficción', 'Novela'],
                 authors: ['Ray Bradbury'],
                 cover: '/assets/fahrenheit.jpg',
-                status: 'AVAILABLE'
+                status: BookModel.status.AVAILABLE
             })
         )
         .then(() =>
@@ -116,7 +116,7 @@ const initBooks = () => {
                 genres: ['Comedia', 'Teatro'],
                 authors: ['Oscar Wilde'],
                 cover: '/assets/earnest.jpg',
-                status: 'AVAILABLE'
+                status: BookModel.status.AVAILABLE
             })
         )
         .then(() =>
@@ -129,7 +129,7 @@ const initBooks = () => {
                 genres: ['Sátira', 'Novela'],
                 authors: ['George Orwell'],
                 cover: '/assets/animal-farm.jpg',
-                status: 'AVAILABLE'
+                status: BookModel.status.AVAILABLE
             })
         )
 }

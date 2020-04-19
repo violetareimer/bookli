@@ -236,7 +236,7 @@ test('Agregar un libro a la lista de lectura', async () => {
     const book = await BookModels.create(bookData)
 
     // Verificamos que el estado sea AVAILABLE
-    expect(book.status).toBe(BookModels.statusAvailable);
+    expect(book.status).toBe(BookModels.status.AVAILABLE);
 
     // Obtenemos el libro
     const receivedBook = await BookModels.start(1);
@@ -244,7 +244,7 @@ test('Agregar un libro a la lista de lectura', async () => {
     expect(book.id).toBe(receivedBook.id);
 
     // Verificamos que el estado sea READING
-    expect(receivedBook.status).toBe(BookModels.statusReading);
+    expect(receivedBook.status).toBe(BookModels.status.READING);
 });
 
 test('Agregar un libro inexistente a la lista de lectura', async () => {
@@ -263,7 +263,7 @@ test('Agregar un libro inexistente a la lista de lectura', async () => {
     const book = await BookModels.create(bookData)
 
     // Verificamos que el estado sea AVAILABLE
-    expect(book.status).toBe(BookModels.statusAvailable);
+    expect(book.status).toBe(BookModels.status.AVAILABLE);
 
     // Obtenemos el libro
     const receivedBook = await BookModels.start(2);

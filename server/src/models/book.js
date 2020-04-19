@@ -13,6 +13,12 @@ const READING = 'READING'
 //Estado terminado
 const FINISHED = 'FINISHED'
 
+const status = {
+	AVAILABLE,
+	READING,
+	FINISHED
+}
+
 /**
  * Modelo de libro.
  * 
@@ -130,9 +136,7 @@ const startBook = (id) => {
 
 const BookModel = {
 	Book: Book,
-	statusAvailable: AVAILABLE,
-	statusReading: READING,
-	statusFinished: FINISHED,
+	status: status,
 	getAll: getAllBooks,
 	create: createBook,
 	get: getBook,

@@ -203,7 +203,7 @@ test('Agregar un libro a la lista de lectura por api', async () => {
     const bookAvailable = await getRequest.json()
 
     // Verificamos que el estado del libro sea AVAILABLE
-    expect(bookAvailable.status).toBe(BookModels.statusAvailable)
+    expect(bookAvailable.status).toBe(BookModels.status.AVAILABLE)
 
     const putRequest = await fetch(URL + '/start/', {
         method: 'PUT',
@@ -212,5 +212,5 @@ test('Agregar un libro a la lista de lectura por api', async () => {
     const bookReading = await putRequest.json()
 
     expect(book.id).toBe(bookReading.id)
-    expect(bookReading.status).toBe(BookModels.statusReading)
+    expect(bookReading.status).toBe(BookModels.status.READING)
 });
