@@ -219,3 +219,54 @@ test('Buscar libros con varios resultados', async () => {
 
     expect(filterBooks.length).toBe(2);
 });
+
+test('Agregar un libro a la lista de lectura', async () => {
+    const bookData = {
+        title: 'The Pragmatic Programmer',
+        synopsis: 'Straight from the programming trenches, The Pragmatic Programmer cuts through the increasing specialization and technicalities of modern software development to examine the core process--taking a requirement and producing working, maintainable code that delights its users. It covers topics ranging from personal responsibility and career development to architectural techniques for keeping your code flexible and easy to adapt and reuse.',
+        year: 1999,
+        publisher: 'Addison-Wesley Professional',
+        isbn: '9780201616224',
+        genres: ['Educación', 'Tecnología', 'Programación'],
+        authors: ['David Thomas', 'Andrew Hunt'],
+        cover: '/assets/pragmatic-programmer.jpg'
+    };
+
+    // Creamos el libro
+    const book = await BookModels.create(bookData)
+
+    // Verificamos que el estado sea AVAILABLE
+    expect(book.status).toBe(BookModels.statusAvailable);
+
+    // Obtenemos el libro
+    const receivedBook = await BookModels.start(1);
+
+    expect(book.id).toBe(receivedBook.id);
+
+    // Verificamos que el estado sea READING
+    expect(receivedBook.status).toBe(BookModels.statusReading);
+});
+
+test('Agregar un libro inexistente a la lista de lectura', async () => {
+    const bookData = {
+        title: 'The Pragmatic Programmer',
+        synopsis: 'Straight from the programming trenches, The Pragmatic Programmer cuts through the increasing specialization and technicalities of modern software development to examine the core process--taking a requirement and producing working, maintainable code that delights its users. It covers topics ranging from personal responsibility and career development to architectural techniques for keeping your code flexible and easy to adapt and reuse.',
+        year: 1999,
+        publisher: 'Addison-Wesley Professional',
+        isbn: '9780201616224',
+        genres: ['Educación', 'Tecnología', 'Programación'],
+        authors: ['David Thomas', 'Andrew Hunt'],
+        cover: '/assets/pragmatic-programmer.jpg'
+    };
+
+    // Creamos el libro
+    const book = await BookModels.create(bookData)
+
+    // Verificamos que el estado sea AVAILABLE
+    expect(book.status).toBe(BookModels.statusAvailable);
+
+    // Obtenemos el libro
+    const receivedBook = await BookModels.start(2);
+
+    expect(receivedBook).toBe(null);
+});

@@ -89,6 +89,15 @@ const createBook = (data) => {
 
 const getBook = (id) => Book.findOne({where: {id: id}})
 
+const startBook = (id) => {
+	return Book.findOne({where: {id: id}}).then(book => {
+		if (book != null) {
+			return book.update({status: READING})
+		}
+		return null
+	})	
+}
+
 const BookModel = {
 	Book: Book,
 	statusAvailable: AVAILABLE,
@@ -96,7 +105,8 @@ const BookModel = {
 	statusFinished: FINISHED,
 	getAll: getAllBooks,
 	create: createBook,
-	get: getBook
+	get: getBook,
+	start: startBook
 }
 
 module.exports = BookModel
