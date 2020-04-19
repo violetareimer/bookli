@@ -4,11 +4,11 @@ const Op = Sequelize.Op
 
 const db = require('../db.js')
 
-const AVAILABLE = 'AV'
+const AVAILABLE = 'AVAILABLE'
 
-const READING = 'RE'
+const READING = 'READING'
 
-const FINISHED = 'FI'
+const FINISHED = 'FINISHED'
 
 const Book = db.define('Book', {
 	// attributes
