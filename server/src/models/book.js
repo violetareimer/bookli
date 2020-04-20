@@ -134,13 +134,31 @@ const startBook = (id) => {
 	})	
 }
 
+/**
+ * Cambiar el estado de un libro a FINISHED (terminado) sólo si su estado es READING (leyendo).
+ * Parámetro id: id a buscar en la base de datos.
+ * 
+ */
+const finishBook = (id) => {
+	return Book.findOne({where: {id: id}}).then(book => {
+		if (book != null) {
+			if (book.status !== READING) {
+				return book
+			}
+			return book.update({status: FINISHED})
+		}
+		return null
+	})	
+}
+
 const BookModel = {
 	Book: Book,
 	status: status,
 	getAll: getAllBooks,
 	create: createBook,
 	get: getBook,
-	start: startBook
+	start: startBook,
+	finish: finishBook
 }
 
 module.exports = BookModel
