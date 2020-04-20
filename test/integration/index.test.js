@@ -214,3 +214,60 @@ test('Agregar un libro a la lista de lectura por api', async () => {
     expect(book.id).toBe(bookReading.id)
     expect(bookReading.status).toBe(BookModels.status.READING)
 });
+
+test('Remover un libro de la lista de lectura por api', async () => {
+    const bookData = {
+        title: 'El Aleph',
+        synopsis: 'Este volumen reúne dieciocho relatos de Jorge Luis Borges, entre ellos quizá los más elogiados y repetidamente citados. Tanto «El inmortal» como «Los teólogos», «Deutsches Requiem» y «La espera» muestran las posibilidades expresivas de la «estética de la inteligencia» borgiana, inimitable fusión de mentalidad matemática, profundidad metafísica y captación poética del mundo.',
+        year: 1949,
+        publisher: 'Editorial Losada',
+        isbn: '9788499089515',
+        genres: ['Cuentos', 'Fantástico'],
+        authors: ['Jorge Luis Borges'],
+        cover: '/assets/el-aleph.jpg',
+        status: BookModels.status.READING
+    };
+
+    // Creamos el libro
+    const book = await BookModels.create(bookData)
+
+    const URL = `${baseURL}/books/1/available/`;
+
+    const putRequest = await fetch(URL, {
+        method: 'PUT',
+        body: {}
+    })
+    const bookAvailable = await putRequest.json()
+
+    expect(book.id).toBe(bookAvailable.id)
+
+    // Verificamos que el estado del libro sea AVAILABLE (disponible)
+    expect(bookAvailable.status).toBe(BookModels.status.AVAILABLE)
+});
+
+test('Remover un libro terminado de la lista de lectura por api', async () => {
+    const bookData = {
+        title: 'El Aleph',
+        synopsis: 'Este volumen reúne dieciocho relatos de Jorge Luis Borges, entre ellos quizá los más elogiados y repetidamente citados. Tanto «El inmortal» como «Los teólogos», «Deutsches Requiem» y «La espera» muestran las posibilidades expresivas de la «estética de la inteligencia» borgiana, inimitable fusión de mentalidad matemática, profundidad metafísica y captación poética del mundo.',
+        year: 1949,
+        publisher: 'Editorial Losada',
+        isbn: '9788499089515',
+        genres: ['Cuentos', 'Fantástico'],
+        authors: ['Jorge Luis Borges'],
+        cover: '/assets/el-aleph.jpg',
+        status: BookModels.status.FINISHED
+    };
+
+    // Creamos el libro
+    const book = await BookModels.create(bookData)
+
+    const URL = `${baseURL}/books/1/available/`;
+
+    const putRequest = await fetch(URL, {
+        method: 'PUT',
+        body: {}
+    })
+
+    // Verificamos que falle la request
+    expect(putRequest.status).toBe(400)
+});
