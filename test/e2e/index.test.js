@@ -72,42 +72,62 @@ describe('Detail view', () => {
     test('Deberia mostrar boton para agregar a lista de lectura', (browser) => {
         browser.url(BASE_URL + '/detail/1')
             .waitForElementVisible('body')
-            .waitForElementVisible('.book__actions .btn.btn-primary')
+            .waitForElementVisible('.book__actions [data-ref=addToList]')
 
-        browser.expect.element('.book__actions .btn.btn-primary')
+        browser.expect.element('.book__actions [data-ref=addToList]')
             .text.to.equal('Empezar a leer');
     });
 
-    test('Deberia mostrar boton para remover libro de la lista de lectura cuando se hace click en el boton para agregar a lista de lectura', (browser) => {
+    test('Deberia mostrar boton para remover libro de la lista de lectura si el libro es parte de la lista de lectura', (browser) => {
         browser.url(BASE_URL + '/detail/1')
             .waitForElementVisible('body')
-            .waitForElementVisible('.book__actions .btn.btn-primary')
+            .waitForElementVisible('.book__actions [data-ref=addToList]')
 
-        browser.click('.book__actions .btn.btn-primary')
+        browser.click('.book__actions [data-ref=addToList]')
             .pause(1000)
-            .waitForElementVisible('.book__actions .btn.btn-warning');
+            .waitForElementVisible('.book__actions [data-ref=removeFromList]');
 
-        browser.expect.element('.book__actions .btn.btn-warning')
+        browser.expect.element('.book__actions [data-ref=removeFromList]')
             .text.to.equal('Dejar de leer');
     });
 
-    test('Deberia remover libro de la lista de lectura cuando se hace click en el boton para remover libro de la lista de lectura', (browser) => {
+    test('Deberia poder remover libro de la lista de lectura', (browser) => {
         browser.url(BASE_URL + '/detail/1')
             .waitForElementVisible('body')
-            .waitForElementVisible('.book__actions .btn.btn-primary')
+            .waitForElementVisible('.book__actions [data-ref=addToList]')
 
-        browser.click('.book__actions .btn.btn-primary')
+        browser.click('.book__actions [data-ref=addToList]')
             .pause(400)
-            .waitForElementVisible('.book__actions .btn.btn-warning');
+            .waitForElementVisible('.book__actions [data-ref=removeFromList]');
 
-        browser.expect.element('.book__actions .btn.btn-warning')
+        browser.expect.element('.book__actions [data-ref=removeFromList]')
             .text.to.equal('Dejar de leer');
 
-        browser.click('.book__actions .btn.btn-warning')
+        browser.click('.book__actions [data-ref=removeFromList]')
             .pause(400)
-            .waitForElementVisible('.book__actions .btn.btn-primary');
+            .waitForElementVisible('.book__actions [data-ref=addToList]');
 
-        browser.expect.element('.book__actions .btn.btn-primary')
+        browser.expect.element('.book__actions [data-ref=addToList]')
             .text.to.equal('Empezar a leer');
+    });
+
+    test('Deberia poder finalizar un libro de la lista de lectura', (browser) => {
+        browser.url(BASE_URL + '/detail/1')
+            .waitForElementVisible('body')
+            .waitForElementVisible('.book__actions [data-ref=addToList]')
+
+        browser.click('.book__actions [data-ref=addToList]')
+            .pause(400)
+            .waitForElementVisible('.book__actions [data-ref=removeFromList]');
+
+        browser.expect.element('.book__actions [data-ref=addToFinish]')
+            .text.to.equal('Lo termine!');
+
+        browser.click('.book__actions [data-ref=addToFinish]')
+            .pause(400)
+            .waitForElementVisible('.book__actions [data-ref=removeFromFinish]');
+
+        browser.expect.element('.book__actions [data-ref=removeFromFinish]')
+            .text.to.equal('Volver a leer');
     });
 })
