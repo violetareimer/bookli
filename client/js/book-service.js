@@ -5,8 +5,12 @@ async function getAll() {
     return await resp.json();
 }
 
-async function search(query) {
-    const resp = await fetch(`${BASE_URL}/books?query=${query}`);
+async function search(query, status) {
+    const searchParams = new URLSearchParams();
+    query && searchParams.set('query', query);
+    status && searchParams.set('status', status);
+
+    const resp = await fetch(`${BASE_URL}/books?${searchParams}`);
     return await resp.json();
 }
 

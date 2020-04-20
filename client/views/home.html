@@ -7,6 +7,26 @@
 </div>
 {% endblock %}
 
+
+{% block main %}
+<div class="home">
+    <div class="filters-container">
+        <form class="card filters" data-ref="filter">
+            <label class="filter">
+                <input type="radio" name="filter" value="AVAILABLE" checked="checked">
+                <div>Descubrir</div>
+            </label>
+
+            <label class="filter">
+                <input type="radio" name="filter" value="READING">
+                <div>Empezados</div>
+            </label>
+        </form>
+    </div>
+    <div class="books-container" data-ref="books"></div>
+</div>
+{% endblock %}
+
 {% block js %}
 <script type="module" src="/js/home.js"></script>
 

@@ -1,6 +1,4 @@
 .book {
-    background: var(--white);
-    box-shadow: var(--shadow);
     display: grid;
     grid-template-rows: 180px 1fr;
     grid-template-columns: 150px 1fr;
@@ -8,8 +6,6 @@
         "cover header"
         "body body";
 
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
     transition: opacity .3s;
     cursor: pointer;
 }
