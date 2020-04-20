@@ -42,6 +42,25 @@ async function removeFromReadingList() {
     renderBook(state.book);
 }
 
+async function addToFinishList() {
+    await bookService.finishBook(state.book.id);
+    state.book = await bookService.get(state.book.id);
+
+    renderBook(state.book);
+}
+
+/**
+ * Quita un libro de la lista de lectura
+ *
+ * Actualiza el libro y la UI
+ **/
+async function removeFromFinishList() {
+    await bookService.makeBookAvailable(state.book.id);
+    state.book = await bookService.get(state.book.id);
+
+    renderBook(state.book);
+}
+
 /**
  * Actualiza la UI
  **/
@@ -51,14 +70,18 @@ function renderBook(book) {
         detail: true
     }, refs.main);
 
-    if (bookRefs.addToList) {
+    if (book.status === 'AVAILABLE') {
         bookRefs.addToList.addEventListener('click', addToReadingList);
     }
 
-    if (bookRefs.removeFromList) {
+    if (book.status === 'READING') {
         bookRefs.removeFromList.addEventListener('click', removeFromReadingList);
+        bookRefs.addToFinish.addEventListener('click', null);
     }
-    removeFromList
+
+    if (book.status === 'FINISHED') {
+        bookRefs.removeFromFinish.addEventListener('click', addToReadingList);
+    }
 }
 
 /**

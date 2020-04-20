@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000/api/v1';
+const BASE_URL = '/api/v1';
 
 async function getAll() {
     const resp = await fetch(`${BASE_URL}/books`);
@@ -29,10 +29,16 @@ async function makeBookAvailable(id) {
     return resp;
 }
 
+async function finishBook(id) {
+    const resp = await fetch(`${BASE_URL}/books/${id}/finish`, { method: 'PUT' });
+    return resp;
+}
+
 export default {
     getAll,
     get,
     search,
     startBook,
+    finishBook,
     makeBookAvailable
 }
