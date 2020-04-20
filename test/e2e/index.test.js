@@ -2,11 +2,13 @@ const fixture = require('../../scripts/fixture.js');
 const startServer = require('../../server/src/index.js')
 const BookModels = require('../../server/src/models/book.js');
 
-const BASE_URL = 'http://localhost:3000';
+let BASE_URL;
 let server;
 
 before(async (browser, done) => {
     server = await startServer();
+
+    BASE_URL = `http://localhost:${server.address().port}`
     done();
 });
 

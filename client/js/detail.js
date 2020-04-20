@@ -76,7 +76,7 @@ function renderBook(book) {
 
     if (book.status === 'READING') {
         bookRefs.removeFromList.addEventListener('click', removeFromReadingList);
-        bookRefs.addToFinish.addEventListener('click', addToFinishList);
+        bookRefs.addToFinish.addEventListener('click', null);
     }
 
     if (book.status === 'FINISHED') {
