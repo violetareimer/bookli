@@ -67,26 +67,13 @@ describe("Home Test", () => {
 })
 
 describe('Detail view', () => {
-
-    test('Deberia mostrar informacion extra en la vista de detalle', (browser) => {
-        browser.url(BASE_URL + '/detail/1')
-            .waitForElementVisible('body')
-            .waitForElementVisible('.book__extra-info')
-
-        browser.expect.element('.book__extra-info p:nth-child(1)')
-            .text.to.equal('Se publicó en el año 1949 por la editorial Editorial Losada.');
-
-        browser.expect.element('.book__extra-info p:nth-child(2)')
-            .text.to.equal('Es un libro perteneciente a los géneros Cuentos, Fantástico.');
-    });
-
     test('Deberia mostrar boton para agregar a lista de lectura', (browser) => {
         browser.url(BASE_URL + '/detail/1')
             .waitForElementVisible('body')
             .waitForElementVisible('.book__actions .btn.btn-primary')
 
         browser.expect.element('.book__actions .btn.btn-primary')
-            .text.to.equal('Agregar a lista de lectura');
+            .text.to.equal('Empezar a leer');
     });
 
     test('Deberia mostrar boton para remover libro de la lista de lectura cuando se hace click en el boton para agregar a lista de lectura', (browser) => {
@@ -96,10 +83,10 @@ describe('Detail view', () => {
 
         browser.click('.book__actions .btn.btn-primary')
             .pause(1000)
-            .waitForElementVisible('.book__actions .btn.btn-primary');
+            .waitForElementVisible('.book__actions .btn.btn-warning');
 
-        browser.expect.element('.book__actions .btn.btn-primary')
-            .text.to.equal('Remover de la lista de lectura');
+        browser.expect.element('.book__actions .btn.btn-warning')
+            .text.to.equal('Dejar de leer');
     });
 
     test('Deberia remover libro de la lista de lectura cuando se hace click en el boton para remover libro de la lista de lectura', (browser) => {
@@ -109,16 +96,16 @@ describe('Detail view', () => {
 
         browser.click('.book__actions .btn.btn-primary')
             .pause(400)
-            .waitForElementVisible('.book__actions .btn.btn-primary');
+            .waitForElementVisible('.book__actions .btn.btn-warning');
 
-        browser.expect.element('.book__actions .btn.btn-primary')
-            .text.to.equal('Remover de la lista de lectura');
+        browser.expect.element('.book__actions .btn.btn-warning')
+            .text.to.equal('Dejar de leer');
 
-        browser.click('.book__actions .btn.btn-primary')
+        browser.click('.book__actions .btn.btn-warning')
             .pause(400)
             .waitForElementVisible('.book__actions .btn.btn-primary');
 
         browser.expect.element('.book__actions .btn.btn-primary')
-            .text.to.equal('Agregar a lista de lectura');
+            .text.to.equal('Empezar a leer');
     });
 })

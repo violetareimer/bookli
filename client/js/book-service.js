@@ -29,10 +29,16 @@ async function makeBookAvailable(id) {
     return resp;
 }
 
+async function finishBook(id) {
+    const resp = await fetch(`${BASE_URL}/books/${id}/finish`, { method: 'PUT' });
+    return resp;
+}
+
 export default {
     getAll,
     get,
     search,
     startBook,
+    finishBook,
     makeBookAvailable
 }
