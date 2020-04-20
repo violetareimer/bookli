@@ -26,6 +26,10 @@ export function debounce(func, wait, immediate) {
     };
 };
 
+export function assign(source, ...targets) {
+    return Object.assign({}, source, ...targets);
+}
+
 export function render(template, context, parent) {
     parent.innerHTML = nunjucks.render(template, context);
     return getRefs(parent);

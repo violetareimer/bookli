@@ -21,8 +21,8 @@ const status = {
 
 /**
  * Modelo de libro.
- * 
- * 
+ *
+ *
  */
 const Book = db.define('Book', {
 	// Atributos
@@ -66,9 +66,9 @@ const Book = db.define('Book', {
  * Obtener todos los libros de la base de datos.
  * Parámetro filter: string de búsqueda que puede coincidir con
  * los atributos title, isbn o publisher
- * 
+ *
  */
-const getAllBooks = (filter) => {
+const getAllBooks = (filter, status) => {
 	let where = {}
 
 	if (filter) {
@@ -91,6 +91,13 @@ const getAllBooks = (filter) => {
 		}
 	}
 
+	if (status) {
+		where = {
+			...where,
+			status: status
+		}
+	}
+
 	return Book.findAll({
 		attributes: {
 		    exclude: ['createdAt', 'updatedAt']
@@ -103,7 +110,7 @@ const getAllBooks = (filter) => {
  * Crear un libro nuevo.
  * Parámetro data: JSON con los atributos a crear.
  * Si no se especifica el status, se crea como AVAILABLE (disponible).
- * 
+ *
  */
 const createBook = (data) => {
 	if (!data.hasOwnProperty('status')) {
@@ -116,14 +123,14 @@ const createBook = (data) => {
 /**
  * Obtener un libro de la base de datos por id.
  * Parámetro id: id a buscar en la base de datos.
- * 
+ *
  */
 const getBook = (id) => Book.findOne({where: {id: id}})
 
 /**
  * Cambiar el estado de un libro a READING (leyendo).
  * Parámetro id: id a buscar en la base de datos.
- * 
+ *
  */
 const startBook = (id) => {
 	return Book.findOne({where: {id: id}}).then(book => {
@@ -131,13 +138,30 @@ const startBook = (id) => {
 			return book.update({status: READING})
 		}
 		return null
-	})	
+	})
+}
+
+/**
+ * Cambiar el estado de un libro a AVAILABLE (disponible) sólo si su estado es READING (leyendo).
+ * Parámetro id: id a buscar en la base de datos.
+ *
+ */
+const makeBookAvailable = (id) => {
+	return Book.findOne({where: {id: id}}).then(book => {
+		if (book != null) {
+			if (book.status !== READING) {
+				return book
+			}
+			return book.update({status: AVAILABLE})
+		}
+		return null
+	})
 }
 
 /**
  * Cambiar el estado de un libro a FINISHED (terminado) sólo si su estado es READING (leyendo).
  * Parámetro id: id a buscar en la base de datos.
- * 
+ *
  */
 const finishBook = (id) => {
 	return Book.findOne({where: {id: id}}).then(book => {
@@ -148,7 +172,7 @@ const finishBook = (id) => {
 			return book.update({status: FINISHED})
 		}
 		return null
-	})	
+	})
 }
 
 const BookModel = {
@@ -158,6 +182,7 @@ const BookModel = {
 	create: createBook,
 	get: getBook,
 	start: startBook,
+	makeAvailable: makeBookAvailable,
 	finish: finishBook
 }
 

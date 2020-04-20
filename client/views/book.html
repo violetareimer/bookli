@@ -1,4 +1,4 @@
-<div class="book {{ 'book--full' if detail }}">
+<div class="card book {{ 'book--full' if detail }}">
     <div class="book__cover" >
         <img src="{{book.cover}}" alt="book cover">
     </div>
@@ -22,6 +22,9 @@
     <div class="book__actions">
         {% if book.status == 'AVAILABLE' %}
         <button class="btn btn-primary" data-ref="addToList">Agregar a lista de lectura</button>
+        {% endif %}
+        {% if book.status == 'READING' %}
+        <button class="btn btn-primary" data-ref="removeFromList">Remover de la lista de lectura</button>
         {% endif %}
     </div>
     {% endif %}
