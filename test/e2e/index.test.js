@@ -1,6 +1,29 @@
-describe("Home Test", () => {
-    const BASE_URL = 'http://localhost:3000/';
+const fixture = require('../../scripts/fixture.js');
+const startServer = require('../../server/src/index.js')
+const BookModels = require('../../server/src/models/book.js');
 
+let BASE_URL;
+let server;
+
+before(async (browser, done) => {
+    server = await startServer();
+
+    BASE_URL = `http://localhost:${server.address().port}`
+    done();
+});
+
+beforeEach(async (browser, done) => {
+    await BookModels.Book.sync({ force: true });
+    await fixture.initBooks();
+    done();
+});
+
+after((browser) => {
+    server.close();
+});
+
+
+describe("Home Test", () => {
     test('Deberia tener de titulo Bookli', (browser) => {
         browser.url(BASE_URL)
             .waitForElementVisible('body')
@@ -42,5 +65,49 @@ describe("Home Test", () => {
         browser.expect.elements('.booklist .book').count.to.equal(0)
         browser.expect.element('.booklist.booklist--empty p')
             .text.to.equal('Hmmm... Parece que no tenemos el libro que buscas.\nProba con otra busqueda.');
+    });
+})
+
+describe('Detail view', () => {
+    test('Deberia mostrar boton para agregar a lista de lectura', (browser) => {
+        browser.url(BASE_URL + '/detail/1')
+            .waitForElementVisible('body')
+            .waitForElementVisible('.book__actions .btn.btn-primary')
+
+        browser.expect.element('.book__actions .btn.btn-primary')
+            .text.to.equal('Empezar a leer');
+    });
+
+    test('Deberia mostrar boton para remover libro de la lista de lectura cuando se hace click en el boton para agregar a lista de lectura', (browser) => {
+        browser.url(BASE_URL + '/detail/1')
+            .waitForElementVisible('body')
+            .waitForElementVisible('.book__actions .btn.btn-primary')
+
+        browser.click('.book__actions .btn.btn-primary')
+            .pause(1000)
+            .waitForElementVisible('.book__actions .btn.btn-warning');
+
+        browser.expect.element('.book__actions .btn.btn-warning')
+            .text.to.equal('Dejar de leer');
+    });
+
+    test('Deberia remover libro de la lista de lectura cuando se hace click en el boton para remover libro de la lista de lectura', (browser) => {
+        browser.url(BASE_URL + '/detail/1')
+            .waitForElementVisible('body')
+            .waitForElementVisible('.book__actions .btn.btn-primary')
+
+        browser.click('.book__actions .btn.btn-primary')
+            .pause(400)
+            .waitForElementVisible('.book__actions .btn.btn-warning');
+
+        browser.expect.element('.book__actions .btn.btn-warning')
+            .text.to.equal('Dejar de leer');
+
+        browser.click('.book__actions .btn.btn-warning')
+            .pause(400)
+            .waitForElementVisible('.book__actions .btn.btn-primary');
+
+        browser.expect.element('.book__actions .btn.btn-primary')
+            .text.to.equal('Empezar a leer');
     });
 })
