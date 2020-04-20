@@ -11,7 +11,8 @@
 
 .booklist--empty p {
     margin-top: var(--space-4);
-    font-size: var(--text-xxl);
+    font-size: var(--text-xl);
+    text-align: center;
 }
 
 .booklist--empty img {
