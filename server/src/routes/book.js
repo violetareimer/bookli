@@ -46,3 +46,22 @@ router.put('/:id/start', function (req, res) {
 })
 
 module.exports = router
+
+/**
+ * Endpoint para cambiar el estado de un libro a FINISHED.
+ * Recibe el id en req.params.id
+ *
+ */
+router.put('/:id/finish', function (req, res) {
+	BookModel.finish(req.params.id).then((book) => {
+		if (book == null) {
+			res.status(404).send('El libro ' + req.params.id + ' no fue encontrado')
+		} else {
+			if (book.status !== BookModel.status.FINISHED) {
+				res.status(400).send('El libro ' + req.params.id + ' no está en la lista de lectura')
+			} else {
+				res.status(200).send(book)
+			}
+		}
+	}).catch(_ => res.status(500).send('Error al obtener libro'))
+})
