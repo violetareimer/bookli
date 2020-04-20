@@ -15,8 +15,14 @@ async function get(id) {
     return await resp.json();
 }
 
+async function startBook(id) {
+    const resp = await fetch(`${BASE_URL}/books/${id}/start`, { method: 'PUT' });
+    return resp;
+}
+
 export default {
     getAll,
     get,
-    search
+    search,
+    startBook
 }

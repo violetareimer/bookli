@@ -6,7 +6,7 @@ const refs = getRefs();
 async function searchBook(e) {
     const searchTerm = e.target.value;
     const books = await bookService.search(searchTerm);
-    rendeBooks(books);
+    renderBooks(books);
 }
 
 function renderBooks(books) {
