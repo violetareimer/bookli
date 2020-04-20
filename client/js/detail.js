@@ -23,8 +23,20 @@ function getBookId(str) {
  *
  * Actualiza el libro y la UI
  **/
-async function addToReaddingList() {
+async function addToReadingList() {
     await bookService.startBook(state.book.id);
+    state.book = await bookService.get(state.book.id);
+
+    renderBook(state.book);
+}
+
+/**
+ * Quita un libro de la lista de lectura
+ *
+ * Actualiza el libro y la UI
+ **/
+async function removeFromReadingList() {
+    await bookService.makeBookAvailable(state.book.id);
     state.book = await bookService.get(state.book.id);
 
     renderBook(state.book);
@@ -40,8 +52,13 @@ function renderBook(book) {
     }, refs.main);
 
     if (bookRefs.addToList) {
-        bookRefs.addToList.addEventListener('click', addToReaddingList);
+        bookRefs.addToList.addEventListener('click', addToReadingList);
     }
+
+    if (bookRefs.removeFromList) {
+        bookRefs.removeFromList.addEventListener('click', removeFromReadingList);
+    }
+    removeFromList
 }
 
 /**

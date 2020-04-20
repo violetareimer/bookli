@@ -23,6 +23,9 @@
         {% if book.status == 'AVAILABLE' %}
         <button class="btn btn-primary" data-ref="addToList">Agregar a lista de lectura</button>
         {% endif %}
+        {% if book.status == 'READING' %}
+        <button class="btn btn-primary" data-ref="removeFromList">Remover de la lista de lectura</button>
+        {% endif %}
     </div>
     {% endif %}
 </div>
