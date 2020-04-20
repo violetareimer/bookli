@@ -89,13 +89,36 @@ describe('Detail view', () => {
             .text.to.equal('Agregar a lista de lectura');
     });
 
-    test('Deberia agregar libro a lista de lectura cuando se hace click en el boton para agregar a lista de lectura', (browser) => {
+    test('Deberia mostrar boton para remover libro de la lista de lectura cuando se hace click en el boton para agregar a lista de lectura', (browser) => {
         browser.url(BASE_URL + '/detail/1')
             .waitForElementVisible('body')
             .waitForElementVisible('.book__actions .btn.btn-primary')
 
         browser.click('.book__actions .btn.btn-primary')
             .pause(400)
-            .waitForElementNotPresent('.book__actions .btn.btn-primary');
+            .waitForElementVisible('.book__actions .btn.btn-primary');
+
+        browser.expect.element('.book__actions .btn.btn-primary')
+            .text.to.equal('Remover de la lista de lectura');
+    });
+
+    test('Deberia remover libro de la lista de lectura cuando se hace click en el boton para remover libro de la lista de lectura', (browser) => {
+        browser.url(BASE_URL + '/detail/1')
+            .waitForElementVisible('body')
+            .waitForElementVisible('.book__actions .btn.btn-primary')
+
+        browser.click('.book__actions .btn.btn-primary')
+            .pause(400)
+            .waitForElementVisible('.book__actions .btn.btn-primary');
+
+        browser.expect.element('.book__actions .btn.btn-primary')
+            .text.to.equal('Remover de la lista de lectura');
+
+        browser.click('.book__actions .btn.btn-primary')
+            .pause(400)
+            .waitForElementVisible('.book__actions .btn.btn-primary');
+
+        browser.expect.element('.book__actions .btn.btn-primary')
+            .text.to.equal('Agregar a lista de lectura');
     });
 })

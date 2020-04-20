@@ -20,9 +20,15 @@ async function startBook(id) {
     return resp;
 }
 
+async function makeBookAvailable(id) {
+    const resp = await fetch(`${BASE_URL}/books/${id}/available`, { method: 'PUT' });
+    return resp;
+}
+
 export default {
     getAll,
     get,
     search,
-    startBook
+    startBook,
+    makeBookAvailable
 }
