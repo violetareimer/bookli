@@ -1,4 +1,4 @@
-{
+module.exports = {
     "src_folders" : ["tests/e2e"],
 
     "webdriver" : {
@@ -10,7 +10,8 @@
     "test_settings" : {
         "default" : {
             "webdriver" : {
-                "server_path": "node_modules/chromedriver/lib/chromedriver/chromedriver.exe",
+                "end_session_on_fail": false,
+                "server_path": require("chromedriver").path,
                 "host": "localhost",
                 "port": 9515
             },
