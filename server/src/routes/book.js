@@ -65,8 +65,6 @@ router.put('/:id/available', function (req, res) {
 	}).catch(_ => res.status(500).send('Error al obtener libro'))
 })
 
-module.exports = router
-
 /**
  * Endpoint para cambiar el estado de un libro a FINISHED.
  * Recibe el id en req.params.id
@@ -85,3 +83,5 @@ router.put('/:id/finish', function (req, res) {
 		}
 	}).catch(_ => res.status(500).send('Error al obtener libro'))
 })
+
+module.exports = router
