@@ -19,6 +19,7 @@
 }
 
 .book.book--full {
+    cursor: auto;
     height: auto;
 }
 
@@ -42,11 +43,11 @@
 }
 
 .book__title {
-    font-size: var(--text-xl);
+    font-size: var(--text-xxl);
 }
 
 .book__author {
-    font-size: var(--text-sm);
+    font-size: var(--text-s);
     color: var(--gray-2);
 }
 
@@ -57,13 +58,13 @@
     overflow: auto;
 }
 
-.book__extra-info {
-    display: none;
-    margin-top: var(--space-5);
+.book__actions {
+    grid-area: action;
+    margin: var(--space-2);
 }
 
-.book--full .book__extra-info {
-    display: block;
+.book__extra-info {
+    margin-top: var(--space-5);
 }
 
 @media (min-width: 640px) {
@@ -73,7 +74,8 @@
         grid-template-columns: 250px 1fr;
         grid-template-areas:
             "cover header"
-            "cover body";
+            "cover body"
+            "action action";
     }
 
     .book__cover {

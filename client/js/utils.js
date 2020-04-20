@@ -1,4 +1,4 @@
-export function getRefs (context) {
+export function getRefs(context) {
     const refs = {};
     const $els = (context || document.body)
         .querySelectorAll('[data-ref]');
@@ -28,4 +28,5 @@ export function debounce(func, wait, immediate) {
 
 export function render(template, context, parent) {
     parent.innerHTML = nunjucks.render(template, context);
+    return getRefs(parent);
 }

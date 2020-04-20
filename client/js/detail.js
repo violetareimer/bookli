@@ -3,6 +3,13 @@ import bookService from './book-service.js';
 
 const refs = getRefs();
 
+const state = {
+    book: null
+};
+
+/**
+ * Obtiene el id de un libro a partir de un path
+ **/
 function getBookId(str) {
     const result = /detail\/(\d+)/.exec(str);
 
@@ -11,16 +18,40 @@ function getBookId(str) {
     }
 }
 
+/**
+ * Agrega un libro a la lista de lectura
+ *
+ * Actualiza el libro y la UI
+ **/
+async function addToReaddingList() {
+    await bookService.startBook(state.book.id);
+    state.book = await bookService.get(state.book.id);
+
+    renderBook(state.book);
+}
+
+/**
+ * Actualiza la UI
+ **/
 function renderBook(book) {
-    render('book.html', {
+    const bookRefs = render('book.html', {
         book: book,
         detail: true
     }, refs.main);
+
+    if (bookRefs.addToList) {
+        bookRefs.addToList.addEventListener('click', addToReaddingList);
+    }
 }
 
-function init() {
+/**
+ * Inicializa la vista
+ **/
+async function init() {
     const bookId = getBookId(window.location.pathname);
-    bookService.get(bookId).then(renderBook);
+    state.book = await bookService.get(bookId);
+
+    renderBook(state.book);
 }
 
 init();
