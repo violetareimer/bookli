@@ -1,10 +1,11 @@
 .book {
     display: grid;
-    grid-template-rows: 180px 1fr;
+    grid-template-rows: minmax(180px, auto) 1fr;
     grid-template-columns: 150px 1fr;
     grid-template-areas:
         "cover header"
-        "body body";
+        "body body"
+        "action action";
 
     transition: opacity .3s;
     cursor: pointer;
