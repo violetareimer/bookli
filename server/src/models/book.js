@@ -68,7 +68,7 @@ const Book = db.define('Book', {
  * los atributos title, isbn o publisher
  * 
  */
-const getAllBooks = (filter) => {
+const getAllBooks = (filter, status) => {
 	let where = {}
 
 	if (filter) {
@@ -88,6 +88,13 @@ const getAllBooks = (filter) => {
 					publisher: like
 				}
 			]
+		}
+	}
+
+	if (status) {
+		where = {
+			...where,
+			status: status
 		}
 	}
 
