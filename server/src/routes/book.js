@@ -6,10 +6,11 @@ const router = express.Router()
 /**
  * Endpoint para obtener todos los libros.
  * Recibe el filtro para la búsqueda en req.query.query
+ * Recibe el filtro para de estado en req.query.status
  *
  */
 router.get('/', function (req, res) {
-	BookModel.getAll(req.query.query).then((books) =>
+	BookModel.getAll(req.query.query, req.query.status).then((books) =>
 		res.status(200).send(books)
 	).catch(_ => {
 		console.log(_)
