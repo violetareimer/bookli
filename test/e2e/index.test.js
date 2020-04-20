@@ -95,7 +95,7 @@ describe('Detail view', () => {
             .waitForElementVisible('.book__actions .btn.btn-primary')
 
         browser.click('.book__actions .btn.btn-primary')
-            .pause(400)
+            .pause(1000)
             .waitForElementVisible('.book__actions .btn.btn-primary');
 
         browser.expect.element('.book__actions .btn.btn-primary')

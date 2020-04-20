@@ -24,6 +24,7 @@
     --border: #cbd5e0;
     --primary: #35b2d3;
     --primary-dark: #1c687d;
+    --primary-light: #abdeed;
 
     --radius: 0.5rem;
 
@@ -96,7 +97,27 @@ p { margin: 0; }
     padding: var(--space-3);
 }
 
-/* navbar */
+.card {
+    background: var(--white);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.home {
+    display: grid;
+    grid-gap: var(--space-3);
+}
+
+@media (min-width: 640px) {
+    .home {
+        grid-template-columns: 1fr 3fr;
+    }
+}
+
+/* End layout */
+
+/* Navbar */
 .header {
     display: flex;
     justify-content: space-between;
@@ -131,7 +152,9 @@ p { margin: 0; }
         letter-spacing: -1.5px;
     }
 }
+/* End Navbar */
 
+/* Search */
 .search {
     position: relative;
     text-align: right;
@@ -159,25 +182,45 @@ p { margin: 0; }
     transform: translateY(-50%);
     margin-left: var(--space-1);
 }
+/* End Search */
 
-/* booklist */
-.booklist {
-    display: grid;
-    grid-gap: var(--space-3);
+/* Filters */
+.filters {
+    overflow: hidden;       /* hace que el borde del hover sea redondo en los filtros */
+    font-size: var(--text-xl);
 }
 
-.booklist--empty {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* Rompo un poco con BEM para ahorrar js */
+.filter input {
+    display: none;
 }
 
-.booklist--empty p {
-    margin-top: var(--space-4);
-    font-size: var(--text-xxl);
+.filter input + div {
+    display: block;
+    cursor: pointer;
+    padding: var(--space-2) var(--space-2) var(--space-2) var(--space-5);
 }
 
-.booklist--empty img {
-    max-width: 300px;
+.filter input + div:hover {
+    background-color: var(--primary-light);
 }
+
+.filter input:checked + div {
+    position: relative;
+    background-color: var(--primary-light);
+}
+
+.filter input:checked + div::before {
+    content: '';
+    display: block;
+    position: absolute;
+    height: var(--text-xxl);
+    top: 50%;
+    transform: translateY(-50%);
+    border: 2px solid var( --primary);
+    left: calc(var( --space-5) - 10px);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+/* End Filters */
 
