@@ -71,11 +71,11 @@ function renderBook(book) {
             'click',
             removeFromReadingList
         );
-        bookRefs.addToFinish.addEventListener('click', null);
+        bookRefs.addToFinish.addEventListener('click', addToFinishList);
     }
 
     if (book.status === 'FINISHED') {
-        bookRefs.removeFromFinish.addEventListener('click', addToReadingList);
+        bookRefs.removeFromFinish.addEventListener('click', null);
     }
 }
 
