@@ -263,3 +263,7 @@ p {
     border-bottom-left-radius: 5px;
 }
 /* End Filters */
+div span a.enlaceBoton {
+    text-decoration: none;
+    color:black;
+}
