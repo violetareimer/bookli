@@ -11,9 +11,29 @@
     cursor: pointer;
 }
 
+
+/* feature #2*/
 .book-link {
-    all: unset;
+    /*all: unset;*/
+    background-color: white;
+    text-decoration: none;
+    font-family: Arial;
+    color:black;
+
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -ms-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+    opacity: 1;
 }
+
+a.book-link div.card:hover{
+    opacity: 0,5;
+    background-color:lightblue;
+}
+
+/* fin feature #2*/
 
 .book.book--full {
     cursor: auto;
