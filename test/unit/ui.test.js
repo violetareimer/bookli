@@ -2,6 +2,9 @@
  * @jest-environment jest-environment-jsdom-sixteen
  */
 
+import nunjucks from 'nunjucks';
+nunjucks.configure('client/views');
+
 import bookServices from '../../client/js/book-service.js';
 import * as utils from '../../client/js/utils.js';
 
@@ -88,6 +91,15 @@ describe('Utils', () => {
 
         expect(result).toStrictEqual({ myEl: $div });
     });
+
+//test violeta
+test ('que el placeholder no este vacio', () => {
+document.documentElement.innerHTML = nunjucks.render('home.html');
+
+expect(document.getElementById('idplace').placeholder).not.toBe(null)
+});
+
+
 
     test('render', () => {
         window.nunjucks = makeMookNunjucks();
