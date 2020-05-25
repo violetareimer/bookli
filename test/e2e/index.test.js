@@ -181,4 +181,18 @@ describe('Detail view', () => {
         browser.expect.element('.book__actions [data-ref=removeFromList]').text.to.equal('Dejar de leer');
         browser.expect.element('.book__actions [data-ref=addToFinish]').text.to.equal('Lo termine!');
     });
+
+//test violeta 
+    test('volver a la pagina principal', browser => {
+        browser
+        .url(BASE_URL + '/detail/1')
+        .waitForElementVisible('body')
+        .waitForElementVisible('.book__actions #volverinicio')
+        .click('.book__actions #volverinicio')
+        .pause(400);
+    
+    browser.expect.url().to.equal(BASE_URL + '/');
+        
+
+    });
 });
