@@ -183,16 +183,16 @@ describe('Detail view', () => {
     });
 
 //test violeta 
-    test('volver a la pagina principal', browser => {
-        browser
-        .url(BASE_URL + '/detail/1')
-        .waitForElementVisible('body')
-        .waitForElementVisible('.book__actions #volverinicio')
-        .click('.book__actions #volverinicio')
-        .pause(400);
-    
-    browser.expect.url().to.equal(BASE_URL + '/');
-        
+test('volver a la pagina principal', browser => {
+    browser
+    .url(BASE_URL + '/detail/1')
+    .waitForElementVisible('body')
+    .waitForElementVisible('#volverinicio > a:nth-child(1)')
+    .click('#volverinicio > a:nth-child(1)')
+    .pause(400);
 
-    });
+browser.expect.url().to.equal(BASE_URL + '/');
+    
+
+});
 });
