@@ -99,10 +99,10 @@ test('El opacity de las cards al pasar el mouse por encima (hover) debe ser de 0
     browser
         .url(BASE_URL)
         .waitForElementVisible('body')
-        .waitForElementVisible('.book-link:hover');
+        .waitForElementVisible('a.book-link')
 
-        browser.moveToElement('a.book-link:nth-child(1)',10,10);
-        browser.expect.element('a.book-link:nth-child(1)').to.have.css('opacity').which.equals('0.5');
+        browser.moveToElement('a.book-link:first-child',10,10).perform();
+        browser.expect.element('a.book-link').to.have.css('opacity').which.equals('0.5');
 });
 /* FIN TEST FEATURE #2 */
     
