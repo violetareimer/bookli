@@ -78,6 +78,23 @@ describe('Home Test', () => {
                 'Hmmm... Parece que no tenemos el libro que buscas.\nProba con otra busqueda.'
             );
     });
+/* TESTEO FEATURE #1 */
+
+    test('El logo de la pagina deberia redireccionar a la pagina principal', browser => {
+        browser
+            .url(BASE_URL)
+            .waitForElementVisible('body')
+            .waitForElementVisible('.brand__name')
+
+            .assert.attributeContains(
+                '.brand__name a',
+                'href',
+                '/'
+            );
+    });
+/* FIN TEST FEATURE #1 */
+
+    
 });
 
 describe('Detail view', () => {
@@ -159,4 +176,40 @@ describe('Detail view', () => {
             .element('.book__actions [data-ref=removeFromFinish]')
             .text.to.equal('Volver a leer');
     });
+
+    test('Deberian aparecer los botones "Dejar de leer" y "Lo termine!" al hacer click en el boton "Volver a leer"', browser => {
+        browser
+            .url(BASE_URL + '/detail/1')
+            .waitForElementVisible('body')
+            .waitForElementVisible('.book__actions [data-ref=addToList]');
+
+        browser
+            .click('.book__actions [data-ref=addToList]')
+            .pause(400)
+            .waitForElementVisible('.book__actions [data-ref=addToFinish]');
+
+        browser
+            .click('.book__actions [data-ref=addToFinish]')
+            .pause(400)
+            .waitForElementVisible('.book__actions [data-ref=removeFromFinish]')
+            .click('.book__actions [data-ref=removeFromFinish]')
+            .pause(400);
+            
+        browser.expect.element('.book__actions [data-ref=removeFromList]').text.to.equal('Dejar de leer');
+        browser.expect.element('.book__actions [data-ref=addToFinish]').text.to.equal('Lo termine!');
+    });
+
+//test violeta 
+test('volver a la pagina principal', browser => {
+    browser
+    .url(BASE_URL + '/detail/1')
+    .waitForElementVisible('body')
+    .waitForElementVisible('#volverinicio > a:nth-child(1)')
+    .click('#volverinicio > a:nth-child(1)')
+    .pause(400);
+
+browser.expect.url().to.equal(BASE_URL + '/');
+    
+
+});
 });
