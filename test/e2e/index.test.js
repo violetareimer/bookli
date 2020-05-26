@@ -78,6 +78,23 @@ describe('Home Test', () => {
                 'Hmmm... Parece que no tenemos el libro que buscas.\nProba con otra busqueda.'
             );
     });
+/* TESTEO FEATURE #1 */
+
+    test('El logo de la pagina deberia redireccionar a la pagina principal', browser => {
+        browser
+            .url(BASE_URL)
+            .waitForElementVisible('body')
+            .waitForElementVisible('.brand__name')
+
+            .assert.attributeContains(
+                '.brand__name a',
+                'href',
+                '/'
+            );
+    });
+/* FIN TEST FEATURE #1 */
+
+    
 });
 
 describe('Detail view', () => {
