@@ -93,7 +93,18 @@ describe('Home Test', () => {
             );
     });
 /* FIN TEST FEATURE #1 */
+/* TESTEO FEATURE #2 */
 
+test('El opacity de las cards al pasar el mouse por encima (hover) debe ser de 0,5', browser => {
+    browser
+        .url(BASE_URL)
+        .waitForElementVisible('body')
+        .waitForElementVisible('.book-link:hover');
+
+        browser.moveToElement('a.book-link:nth-child(1)',10,10);
+        browser.expect.element('a.book-link:nth-child(1)').to.have.css('opacity').which.equals('0.5');
+});
+/* FIN TEST FEATURE #2 */
     
 });
 
