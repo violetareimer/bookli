@@ -141,7 +141,7 @@ p {
     background: var(--white);
     box-shadow: var(--shadow);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
+    border-radius: var(--radius);  
 }
 
 .home {
@@ -263,3 +263,9 @@ p {
     border-bottom-left-radius: 5px;
 }
 /* End Filters */
+/*Feature 1*/
+div span a.enlaceBoton {
+    text-decoration: none;
+    color:black;
+}
+/*Fin Feature 1*/
