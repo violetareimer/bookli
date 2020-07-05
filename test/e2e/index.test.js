@@ -120,6 +120,17 @@ test('El opacity de las cards al pasar el mouse por encima (hover) debe ser de 0
 });
 /* FIN TEST FEATURE #2 */
     
+/*TESTEO COLOR BORDER BOOK*/
+test('El color del borde de las cards debe ser purpura, (255, 0, 255) en RGB', browser => {
+    browser
+        .url(BASE_URL)
+        .waitForElementVisible('body')
+        .waitForElementVisible('.booklist')
+
+        browser.expect.element('.book').to.have.css('border-color').which.equals('rgb(255, 0, 255)');
+});
+
+/*FIN TESTEO COLOR BORDER BOOK*/
 });
 
 describe('Detail view', () => {
