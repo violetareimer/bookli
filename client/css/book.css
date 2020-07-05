@@ -96,6 +96,7 @@ a.book-link div.card:hover{
             'cover header'
             'cover body'
             'action action';
+            border-color:rgb(255, 0, 255);
     }
 
     .book__cover {
