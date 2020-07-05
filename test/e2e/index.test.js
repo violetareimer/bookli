@@ -78,6 +78,20 @@ describe('Home Test', () => {
                 'Hmmm... Parece que no tenemos el libro que buscas.\nProba con otra busqueda.'
             );
     });
+
+
+    test('El botón debería redireccionar a Amazon', browser => {
+        browser
+            .url(BASE_URL)
+            .waitForElementVisible('body')
+            .waitForElementVisible('#btncomprar')
+
+            .assert.attributeContains(
+                '#btncomprar',
+                'href',
+                'https://www.amazon.es/comprar-libros-espa%C3%B1ol/b?ie=UTF8&node=599364031'
+            );
+    });
 /* TESTEO FEATURE #1 */
 
     test('El logo de la pagina deberia redireccionar a la pagina principal', browser => {
