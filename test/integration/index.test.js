@@ -72,6 +72,29 @@ test('Deberia obtener un array no vacio de generos al recuperar el libro por api
     expect(books.genres.length).not.toBe(0);
 });
 
+test('Deberia obtener el ISBN no vacio al recuperar el libro por api', async () => {
+    const bookData = {
+        title: 'El Aleph',
+        synopsis:
+            'Este volumen reúne dieciocho relatos de Jorge Luis Borges, entre ellos quizá los más elogiados y repetidamente citados. Tanto «El inmortal» como «Los teólogos», «Deutsches Requiem» y «La espera» muestran las posibilidades expresivas de la «estética de la inteligencia» borgiana, inimitable fusión de mentalidad matemática, profundidad metafísica y captación poética del mundo.',
+        year: 1949,
+        publisher: 'Editorial Losada',
+        isbn: '9788499089515',
+        genres: ['Cuentos', 'Fantástico'],
+        authors: ['Jorge Luis Borges'],
+        cover: '/assets/el-aleph.jpg',
+    };
+
+    // Creamos el libro
+    await BookModels.create(bookData);
+
+    const URL = `${baseURL}/books/1`;
+    const req = await fetch(URL);
+    const books = await req.json();
+
+    expect(books.isbn).not.toBe('');
+});
+
 test('Buscar libros por api con un resultado', async () => {
     const firstBookData = {
         title: 'The Pragmatic Programmer',
